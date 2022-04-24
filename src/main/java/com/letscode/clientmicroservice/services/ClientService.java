@@ -31,4 +31,16 @@ public class ClientService {
        Client client = clientRepository.findByCpf(cpf).orElseThrow(ClientNotFoundException::new);
        return ClientResponse.convertToResponse(client);
     }
+
+    public void delete(String cpf) {
+        Client client = clientRepository.findByCpf(cpf).orElseThrow(ClientNotFoundException::new);
+        clientRepository.delete(client);
+    }
+
+    public ClientResponse update(String cpf, ClientRequest clientRequest) {
+        Client client = clientRepository.findByCpf(cpf).orElseThrow(ClientNotFoundException::new);
+        client.setName(clientRequest.getName());
+        client.setCpf(clientRequest.getCpf());
+        return ClientResponse.convertToResponse(client);
+    }
 }

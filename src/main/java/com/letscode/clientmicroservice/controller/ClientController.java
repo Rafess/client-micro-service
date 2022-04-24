@@ -26,4 +26,16 @@ public class ClientController {
     public ClientResponse getClient(@PathVariable String cpf) {
         return clientService.getClient(cpf);
     }
+
+    @DeleteMapping("/delete/{cpf}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteClient(@PathVariable String cpf) {
+        clientService.delete(cpf);
+    }
+
+    @PutMapping("/update/{cpf}")
+    @ResponseStatus(HttpStatus.OK)
+    public ClientResponse updateClient(@PathVariable String cpf, @RequestBody ClientRequest clientRequest) {
+        return clientService.update(cpf, clientRequest);
+    }
 }
